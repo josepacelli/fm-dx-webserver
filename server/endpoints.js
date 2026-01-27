@@ -480,7 +480,7 @@ router.get('/tunnelservers', async (req, res) => {
 
 // Endpoint to get estacoes.json
 router.get('/getEstacoes', (req, res) => {
-  if (!req.session.isAdminAuthenticated) {
+  if (req.session.fmlist_adminOnly) {
     res.status(403).send('Unauthorized');
     return;
   }
