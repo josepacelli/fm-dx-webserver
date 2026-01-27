@@ -1069,8 +1069,9 @@ const updateDataElements = throttle(function(parsedData) {
     // Mostrar PTY vindo das estações se houver estação correspondente à frequência atual
     try {
         const est = $dataPs.data('estacao');
+
         if (est && est.pty !== undefined && est.pty !== null) {
-            updateTextIfChanged($dataPty, String(est.pty));
+            updateTextIfChanged($dataPty, est.pty);
         } else {
             // Fallback para valores RDS existentes (usa/europe) — se preferir manter "Pop Music" mude aqui
             updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
