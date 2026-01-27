@@ -282,6 +282,8 @@ $(document).ready(function () {
 
     initCanvas();
     initTooltips();
+    // Carrega as estações do arquivo JSON (se existir)
+    try { loadEstacoes(); } catch (e) { console.warn('loadEstacoes failed', e); }
 });
 
 function getServerTime() {
@@ -898,6 +900,65 @@ const $dataMs = $('.data-ms');
 const $flagDesktopCointainer = $('#flags-container-desktop');
 const $dataPty = $('.data-pty');
 
+// New: Estações (carregadas de web/data/estacoes.json)
+let estacoes = [];
+
+function loadEstacoes() {
+    // Carrega o JSON de estações sem cache para refletir atualizações imediatas
+    fetch('./data/estacoes.json', { cache: 'no-store' })
+        .then(response => {
+            if (!response.ok) throw new Error('Falha ao carregar estacoes.json: ' + response.statusText);
+            return response.json();
+        })
+        .then(json => {
+            estacoes = Array.isArray(json) ? json : [];
+            console.log('Estações carregadas:', estacoes.length);
+            // Aplicar imediatamente para a frequência atual se já disponível
+            try {
+                const currentFreqText = $dataFrequency.text();
+                if (currentFreqText && currentFreqText.length > 0) {
+                    applyEstacaoForFrequency(currentFreqText);
+                }
+            } catch (e) {
+                // ignore
+            }
+        })
+        .catch(err => {
+            console.error('Erro ao carregar estacoes.json:', err);
+            estacoes = [];
+        });
+}
+
+function applyEstacaoForFrequency(freqText) {
+    if (!freqText) return;
+    // Extrai número da frequência (ex: "102.7")
+    const parsed = Number(String(freqText).replace(/[^0-9\.]/g, ''));
+    if (isNaN(parsed)) return;
+
+    const matched = estacoes.find(e => Number(e.frequencia) === Number(parsed));
+    if (matched) {
+        // Atualiza tooltip/descrição no campo PS (ou em outro elemento se desejar)
+        try {
+            $dataPs.attr('title', matched.descricao || '');
+            $dataPs.data('estacao', matched);
+            // Se existir elemento #estacao-mensagem, atualiza-o
+            const $msg = $('#estacao-mensagem');
+            if ($msg.length) {
+                $msg.text(matched.mensagem || '');
+            }
+        } catch (e) {
+            console.log('applyEstacaoForFrequency error', e);
+        }
+    } else {
+        try {
+            $dataPs.removeAttr('title').removeData('estacao');
+            $('#estacao-mensagem').text('');
+        } catch (e) {
+            // ignore
+        }
+    }
+}
+
 // Throttling function to limit the frequency of updates
 function throttle(fn, wait) {
     let isThrottled = false, savedArgs, savedThis;
@@ -919,6 +980,7 @@ function throttle(fn, wait) {
                 savedArgs = savedThis = null;
             }
         }, wait);
+
     }
     
     return wrapper;
@@ -947,6 +1009,14 @@ function buildAltTxList(txList) {
 function updateTextIfChanged($element, newText) {
     if ($element.text() !== newText) {
         $element.text(newText);
+    }
+    // Se o elemento atualizado for a frequência, aplicar dados da lista de estações
+    try {
+        if ($element.is($dataFrequency)) {
+            applyEstacaoForFrequency(newText);
+        }
+    } catch (e) {
+        // ignore
     }
 }
 
@@ -996,7 +1066,19 @@ const updateDataElements = throttle(function(parsedData) {
     updateHtmlIfChanged($dataRt1, processString(parsedData.rt1, parsedData.rt1_errors));
     
     //updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
-    updateTextIfChanged($dataPty, "Pop Music");
+    // Mostrar PTY vindo das estações se houver estação correspondente à frequência atual
+    try {
+        const est = $dataPs.data('estacao');
+        if (est && est.pty !== undefined && est.pty !== null) {
+            updateTextIfChanged($dataPty, String(est.pty));
+        } else {
+            // Fallback para valores RDS existentes (usa/europe) — se preferir manter "Pop Music" mude aqui
+            updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
+        }
+    } catch (e) {
+        // Em caso de erro, manter comportamento antigo
+        updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
+    }
 
 
     if (parsedData.rds === true) {

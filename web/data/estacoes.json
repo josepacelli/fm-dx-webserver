@@ -1,0 +1,16 @@
+[
+  {
+    "nome": "Estação 102.7",
+    "frequencia": 102.7,
+    "pty": 11,
+    "descricao": "Rádio 102.7 - Pop",
+    "mensagem": "Bem-vindo à 102.7"
+  },
+  {
+    "nome": "Estação 89.1",
+    "frequencia": 89.1,
+    "pty": 4,
+    "descricao": "Rádio 89.1 - Notícias",
+    "mensagem": "Últimas notícias na 89.1"
+  }
+]
