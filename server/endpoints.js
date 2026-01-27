@@ -478,4 +478,52 @@ router.get('/tunnelservers', async (req, res) => {
     res.json(results);
   });
 
+// Endpoint to get estacoes.json
+router.get('/getEstacoes', (req, res) => {
+  if (!req.session.isAdminAuthenticated) {
+    res.status(403).send('Unauthorized');
+    return;
+  }
+
+  const estacoes_path = path.join(__dirname, '../web/data/estacoes.json');
+
+  try {
+    const data = fs.readFileSync(estacoes_path, 'utf-8');
+    const jsonData = JSON.parse(data);
+    res.json(jsonData);
+  } catch (error) {
+    logError(`Error reading estacoes.json: ${error}`);
+    res.status(500).send('Error reading estacoes.json');
+  }
+});
+
+// Endpoint to save estacoes.json
+router.post('/saveEstacoes', (req, res) => {
+  if (!req.session.isAdminAuthenticated) {
+    res.status(403).send('Unauthorized');
+    return;
+  }
+
+  const estacoes_path = path.join(__dirname, '../web/data/estacoes.json');
+
+  try {
+    const data = req.body;
+
+    // Validate that it's an array
+    if (!Array.isArray(data)) {
+      res.status(400).send('Data must be an array');
+      return;
+    }
+
+    // Write the file
+    fs.writeFileSync(estacoes_path, JSON.stringify(data, null, 2), 'utf-8');
+
+    logInfo('estacoes.json saved successfully');
+    res.status(200).send('Estações salvas com sucesso!');
+  } catch (error) {
+    logError(`Error saving estacoes.json: ${error}`);
+    res.status(500).send('Error saving estacoes.json');
+  }
+});
+
 module.exports = router;
