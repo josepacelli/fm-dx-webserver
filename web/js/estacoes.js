@@ -35,7 +35,15 @@ function openEstacoes() {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      estacoesList = data;
+      // Normalize frequencia to string to avoid type inconsistencies
+      estacoesList = Array.isArray(data) ? data.map(e => ({
+        nome: e.nome || '',
+        frequencia: (e.frequencia === undefined || e.frequencia === null) ? '' : String(e.frequencia),
+        pty: e.pty || '',
+        descricao: e.descricao || '',
+        mensagem: e.mensagem || ''
+      })) : [];
+
       populateEstacaoTable();
 
       // Show the popup
@@ -67,7 +75,7 @@ function addEstacaoRow(estacao, index) {
         <input type="text" class="estacao-nome" value="${escapeHtml(estacao.nome || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Nome da estação">
       </td>
       <td style="padding: 12px; border-right: 1px solid var(--color-2);">
-        <input type="number" class="estacao-frequencia" value="${estacao.frequencia || ''}" step="0.1" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Ex: 102.7">
+        <input type="text" class="estacao-frequencia" value="${escapeHtml(estacao.frequencia || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Ex: 102.7">
       </td>
       <td style="padding: 12px; border-right: 1px solid var(--color-2);">
         <input type="text" class="estacao-pty" value="${escapeHtml(estacao.pty || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Pop Music">
@@ -98,7 +106,7 @@ function saveEstacoes() {
     const row = $(this);
     const estacao = {
       nome: row.find('.estacao-nome').val().trim(),
-      frequencia: parseFloat(row.find('.estacao-frequencia').val()) || 0,
+      frequencia: row.find('.estacao-frequencia').val().trim(),
       pty: row.find('.estacao-pty').val().trim(),
       descricao: row.find('.estacao-descricao').val().trim(),
       mensagem: row.find('.estacao-mensagem').val().trim()
@@ -150,5 +158,3 @@ function escapeHtml(text) {
   };
   return text.replace(/[&<>"']/g, m => map[m]);
 }
-
-
