@@ -995,8 +995,10 @@ const updateDataElements = throttle(function(parsedData) {
     updateHtmlIfChanged($dataRt0, processString(parsedData.rt0, parsedData.rt0_errors));
     updateHtmlIfChanged($dataRt1, processString(parsedData.rt1, parsedData.rt1_errors));
     
-    updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
-    
+    //updateTextIfChanged($dataPty, rdsMode == 'true' ? usa_programmes[parsedData.pty] : europe_programmes[parsedData.pty]);
+    updateTextIfChanged($dataPty, "Pop Music");
+
+
     if (parsedData.rds === true) {
         $flagDesktopCointainer.css('background-color', 'var(--color-2-transparent)');
     } else {
