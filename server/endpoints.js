@@ -499,7 +499,7 @@ router.get('/getEstacoes', (req, res) => {
 
 // Endpoint to save estacoes.json
 router.post('/saveEstacoes', (req, res) => {
-  if (!req.session.isAdminAuthenticated) {
+  if (req.session.fmlist_adminOnly) {
     res.status(403).send('Unauthorized');
     return;
   }
