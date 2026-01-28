@@ -20,7 +20,7 @@ $(document).ready(function() {
       // station name may be in data-station-name or PS
       let nome = ($('#data-station-name').text() || '').toString().trim();
       const cidade = ($('#data-station-city').text() || '').toString().trim();
-      const pty = ($('.data-pty').text() || '').toString().trim();
+      const pty = ($('.data-pty').first().text() || '').toString().trim();
       // description often stored in data-ps title attribute
       const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
       // message might be in #estacao-mensagem or in data on #data-ps
@@ -227,7 +227,7 @@ if (typeof window !== 'undefined') {
       const freq = freqRaw || cmdVal;
       let nome = ($('#data-station-name').text() || '').toString().trim();
       const cidade = ($('#data-station-city').text() || '').toString().trim();
-      const pty = ($('.data-pty').text() || '').toString().trim();
+      const pty = ($('.data-pty').first().text() || '').toString().trim();
       const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
       let mensagem = '';
       const $estacaoMensagem = $('#estacao-mensagem');
