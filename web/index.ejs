@@ -266,14 +266,14 @@
 
           <div class="flex-container flex-phone flex-phone-column">
             <div id="data-ant-container" class="hide-desktop" style="padding-left: 18px;padding-right: 18px;margin-top: -20px;">
-              <% if (antennas.enabled == true) { %>
+              <% if (antennas.enabled === true) { %>
                 <div class="panel-100-real no-bg h-100 br-0 dropdown data-ant" id="data-ant-phone" style="max-height: 48px;width: 50%;">
                   <input type="text" placeholder="Ant A" readonly tabindex="0" style="border-radius: 0 0 15px 15px;">
                   <ul class="options open-top" tabindex="-1">
-                    <% if(antennas.ant1.enabled == true) { %><li data-value="0" class="option" tabindex="0"><%= antennas.ant1.name %></li><% } %>
-                    <% if(antennas.ant2.enabled == true) { %><li data-value="1" class="option" tabindex="0"><%= antennas.ant2.name %></li><% } %>
-                    <% if(antennas.ant3.enabled == true) { %><li data-value="2" class="option" tabindex="0"><%= antennas.ant3.name %></li><% } %>
-                    <% if(antennas.ant4.enabled == true) { %><li data-value="3" class="option" tabindex="0"><%= antennas.ant4.name %></li><% } %>
+                    <% if(antennas.ant1.enabled === true) { %><li data-value="0" class="option" tabindex="0"><%= antennas.ant1.name %></li><% } %>
+                    <% if(antennas.ant2.enabled === true) { %><li data-value="1" class="option" tabindex="0"><%= antennas.ant2.name %></li><% } %>
+                    <% if(antennas.ant3.enabled === true) { %><li data-value="2" class="option" tabindex="0"><%= antennas.ant3.name %></li><% } %>
+                    <% if(antennas.ant4.enabled === true) { %><li data-value="3" class="option" tabindex="0"><%= antennas.ant4.name %></li><% } %>
                   </ul>
                 </div>
                 <% } %>
@@ -378,7 +378,7 @@
                 <% if (device === 'xdr') { %><button class="data-ims tooltip p-10 m-left-5" aria-label="IF+ Filter" data-tooltip="<strong>The IF+ filter increases gain by 6dB</strong>"><span class="text-bold">IF+</span></button><% } %>
             </div>
 
-            <% if (fmlist_integration == true && (fmlist_adminOnly == false || isTuneAuthenticated)) { %>
+            <% if (fmlist_integration === true && (fmlist_adminOnly === false || isTuneAuthenticated)) { %>
               <p class="flex-phone flex-center">Logging</p>
               <button class="tooltip bg-color-4 mini-popup log-fmlist" data-tooltip="<strong>LOG TO FMLIST</strong><br>Clicking this button logs the current station to FMLIST's visual logbook." aria-label="Log to FMLIST" style="width: calc(100%); height: 48px;">
                 <i class="fa-solid fa-flag fa-lg"></i>
