@@ -12,13 +12,39 @@ $(document).ready(function() {
 
   // Add new row button
   $(document).on('click', '#estacoes-add-row', function() {
-    addEstacaoRow({
-      nome: '',
-      frequencia: '',
-      pty: '',
-      descricao: '',
-      mensagem: ''
-    });
+    // Gather RDS/local UI values as defaults
+    try {
+      const freqRaw = ($('#data-frequency').text() || '').toString().trim();
+      const cmdVal = ($('#commandinput').val && $('#commandinput').val()) ? $('#commandinput').val().toString().trim() : '';
+      const freq = freqRaw || cmdVal;
+      // station name may be in data-station-name or PS
+      let nome = ($('#data-station-name').text() || '').toString().trim();
+      const cidade = ($('#data-station-city').text() || '').toString().trim();
+      const pty = ($('.data-pty').text() || '').toString().trim();
+      // description often stored in data-ps title attribute
+      const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
+      // message might be in #estacao-mensagem or in data on #data-ps
+      let mensagem = '';
+      const $estacaoMensagem = $('#estacao-mensagem');
+      if ($estacaoMensagem.length) {
+        mensagem = ($estacaoMensagem.text() || '').toString().trim();
+      } else {
+        const psData = $('#data-ps').data('estacao');
+        if (psData && psData.mensagem) mensagem = psData.mensagem.toString().trim();
+      }
+
+      // If station name is empty, fallback to PS text
+      if (!nome) nome = ($('#data-ps').text() || '').toString().trim();
+
+      const defaults = { nome: nome || '', frequencia: freq || '', pty: pty || '', descricao: descricao || '', mensagem: mensagem || '' };
+      console.log('[estacoes] add-row defaults ->', defaults);
+
+      addEstacaoRow(defaults);
+    } catch (e) {
+      // Fallback to empty row if any error occurs
+      console.error('[estacoes] error gathering RDS defaults for new row', e);
+      addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', mensagem: '' });
+    }
   });
 
   // Delete row button
@@ -95,6 +121,39 @@ function addEstacaoRow(estacao, index) {
   `;
 
   tbody.append(row);
+  console.log('[estacoes] appended row id=', rowId);
+  try { console.log('[estacoes] new row html:', $('#' + rowId).prop('outerHTML')); } catch(e) { console.warn(e); }
+  // Focus the newly added row's name input for visibility
+  try {
+    const $new = $('#' + rowId);
+    $new.find('.estacao-nome').focus();
+  } catch (e) {
+    // ignore
+  }
+  // show toast feedback if available
+  try { if (typeof sendToast === 'function') sendToast('info', 'Linha adicionada', 'Nova estação adicionada (não salva)', true, true); } catch(e) {}
+  return rowId;
+}
+
+// Helper to add from console using RDS defaults
+if (typeof window !== 'undefined') {
+  window.addEstacaoFromRds = function() {
+    try {
+      const defaults = window._getRdsDefaults ? window._getRdsDefaults() : null;
+      if (defaults) {
+        const rowId = addEstacaoRow(defaults);
+        console.log('[estacoes] addEstacaoFromRds added:', defaults, 'rowId=' + rowId);
+        return {defaults, rowId};
+      } else {
+        console.warn('[estacoes] addEstacaoFromRds: no defaults available, adding empty row');
+        const rowId = addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', mensagem: '' });
+        return {defaults: null, rowId};
+      }
+    } catch (e) {
+      console.error('[estacoes] addEstacaoFromRds error', e);
+      return null;
+    }
+  };
 }
 
 function saveEstacoes() {
@@ -157,4 +216,32 @@ function escapeHtml(text) {
     "'": '&#039;'
   };
   return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+// Debug helper: returns the RDS-derived defaults the Add button uses
+if (typeof window !== 'undefined') {
+  window._getRdsDefaults = function() {
+    try {
+      const freqRaw = ($('#data-frequency').text() || '').toString().trim();
+      const cmdVal = ($('#commandinput').val && $('#commandinput').val()) ? $('#commandinput').val().toString().trim() : '';
+      const freq = freqRaw || cmdVal;
+      let nome = ($('#data-station-name').text() || '').toString().trim();
+      const cidade = ($('#data-station-city').text() || '').toString().trim();
+      const pty = ($('.data-pty').text() || '').toString().trim();
+      const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
+      let mensagem = '';
+      const $estacaoMensagem = $('#estacao-mensagem');
+      if ($estacaoMensagem.length) {
+        mensagem = ($estacaoMensagem.text() || '').toString().trim();
+      } else {
+        const psData = $('#data-ps').data('estacao');
+        if (psData && psData.mensagem) mensagem = psData.mensagem.toString().trim();
+      }
+      if (!nome) nome = ($('#data-ps').text() || '').toString().trim();
+      return { nome, frequencia: freq, cidade, pty, descricao, mensagem };
+    } catch (e) {
+      console.error('[estacoes] _getRdsDefaults error', e);
+      return null;
+    }
+  };
 }

@@ -12,5 +12,12 @@
     "pty": "Pop Music",
     "descricao": "Rádio 89.1 - Notícias",
     "mensagem": "Últimas notícias na 89.1"
+  },
+  {
+    "nome": "O POVO",
+    "frequencia": "95.500",
+    "pty": "NewsNews",
+    "descricao": "O POVO",
+    "mensagem": ""
   }
 ]

@@ -438,7 +438,7 @@
         <div class="popup-content text-left flex-container flex-phone flex-column" style="flex: 1; overflow-y: auto;">
           <div style="padding: 20px;">
             <div style="margin-bottom: 20px;">
-              <button id="estacoes-add-row" class="bg-color-4" style="padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 15px;">
+              <button id="estacoes-add-row" type="button" onclick="(window.addEstacaoFromRds?window.addEstacaoFromRds():null)" class="bg-color-4" style="padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 15px;">
                 <i class="fa-solid fa-plus"></i> Adicionar Estação
               </button>
             </div>
@@ -614,3 +614,4 @@
 </body>
 
 </html>
+
