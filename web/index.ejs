@@ -372,10 +372,10 @@
             
             <p class="flex-phone flex-center">Filters</p>
             <div class="flex-container flex-phone flex-center">
-                <% if (device == 'tef') { %><button class="data-eq tooltip p-10 m-right-5" style="height: 48px" aria-label="EQ Filter" data-tooltip="<strong>The cEQ filter can reduce bandwidth below 56 kHz.</strong><br><br>Useful for weak stations next to strong ones,<br>although it may pick up more interference."><span class="text-bold">cEQ</span></button><% } %>
-                <% if (device == 'xdr') { %><button class="data-eq tooltip p-10 m-right-5" aria-label="RF+ Filter" data-tooltip="<strong>The RF+ filter increases gain by 5dB</strong>"><span class="text-bold">RF+</span></button><% } %>
-                <% if (device == 'tef') { %><button class="data-ims tooltip p-10 m-left-5" style="height: 48px;" aria-label="iMS + Filter" data-tooltip="<strong>The iMS filter reduces multipath audio artifacts.</strong><br><br>It's recommended to leave it on most of the time."><span class="text-bold">iMS</span></button><% } %>
-                <% if (device == 'xdr') { %><button class="data-ims tooltip p-10 m-left-5" aria-label="IF+ Filter" data-tooltip="<strong>The IF+ filter increases gain by 6dB</strong>"><span class="text-bold">IF+</span></button><% } %>
+                <% if (device === 'tef') { %><button class="data-eq tooltip p-10 m-right-5" style="height: 48px" aria-label="EQ Filter" data-tooltip="<strong>The cEQ filter can reduce bandwidth below 56 kHz.</strong><br><br>Useful for weak stations next to strong ones,<br>although it may pick up more interference."><span class="text-bold">cEQ</span></button><% } %>
+                <% if (device === 'xdr') { %><button class="data-eq tooltip p-10 m-right-5" aria-label="RF+ Filter" data-tooltip="<strong>The RF+ filter increases gain by 5dB</strong>"><span class="text-bold">RF+</span></button><% } %>
+                <% if (device === 'tef') { %><button class="data-ims tooltip p-10 m-left-5" style="height: 48px;" aria-label="iMS + Filter" data-tooltip="<strong>The iMS filter reduces multipath audio artifacts.</strong><br><br>It's recommended to leave it on most of the time."><span class="text-bold">iMS</span></button><% } %>
+                <% if (device === 'xdr') { %><button class="data-ims tooltip p-10 m-left-5" aria-label="IF+ Filter" data-tooltip="<strong>The IF+ filter increases gain by 6dB</strong>"><span class="text-bold">IF+</span></button><% } %>
             </div>
 
             <% if (fmlist_integration == true && (fmlist_adminOnly == false || isTuneAuthenticated)) { %>
