@@ -39,7 +39,7 @@ $(document).ready(function() {
       const defaults = { nome: nome || '', frequencia: freq || '', pty: pty || '', descricao: descricao || '', mensagem: mensagem || '' };
       console.log('[estacoes] add-row defaults ->', defaults);
 
-      addEstacaoRow(defaults);
+      addEstacaoRow(defaults, undefined, true);
     } catch (e) {
       // Fallback to empty row if any error occurs
       console.error('[estacoes] error gathering RDS defaults for new row', e);
@@ -91,7 +91,7 @@ function populateEstacaoTable() {
   });
 }
 
-function addEstacaoRow(estacao, index) {
+function addEstacaoRow(estacao, index, showToast = false) {
   const tbody = $('#estacoes-tbody');
   const rowId = 'estacao-row-' + (index !== undefined ? index : Date.now());
 
@@ -130,8 +130,8 @@ function addEstacaoRow(estacao, index) {
   } catch (e) {
     // ignore
   }
-  // show toast feedback if available
-  try { if (typeof sendToast === 'function') sendToast('info', 'Linha adicionada', 'Nova estação adicionada (não salva)', true, true); } catch(e) {}
+  // show toast feedback only when explicitly requested (new rows via Add button/console)
+  try { if (showToast && typeof sendToast === 'function') sendToast('info', 'Linha adicionada', 'Nova estação adicionada (não salva)', true, true); } catch(e) {}
   return rowId;
 }
 
@@ -141,7 +141,7 @@ if (typeof window !== 'undefined') {
     try {
       const defaults = window._getRdsDefaults ? window._getRdsDefaults() : null;
       if (defaults) {
-        const rowId = addEstacaoRow(defaults);
+        const rowId = addEstacaoRow(defaults, undefined, true);
         console.log('[estacoes] addEstacaoFromRds added:', defaults, 'rowId=' + rowId);
         return {defaults, rowId};
       } else {

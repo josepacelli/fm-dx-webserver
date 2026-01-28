@@ -16,8 +16,15 @@
   {
     "nome": "O POVO",
     "frequencia": "95.500",
-    "pty": "NewsNews",
+    "pty": "News",
     "descricao": "O POVO",
+    "mensagem": ""
+  },
+  {
+    "nome": "ATLANTIC",
+    "frequencia": "105.700",
+    "pty": "Pop Music",
+    "descricao": "ATLANTIC",
     "mensagem": ""
   }
 ]
