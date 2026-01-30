@@ -1,23 +1,23 @@
 [
   {
-    "nome": "Estação 102.7",
-    "frequencia": "102.7",
+    "nome": "RADIO",
+    "frequencia": "102.700",
     "pty": "Pop Music",
-    "descricao": "Rádio 102.7 - Pop",
-    "mensagem": "Bem-vindo à 102.7"
+    "descricao": "BEACH PARK",
+    "mensagem": ""
   },
   {
-    "nome": "Estação 88.1",
-    "frequencia": "88.9",
+    "nome": "JANGA",
+    "frequencia": "88.900",
     "pty": "Pop Music",
-    "descricao": "Rádio 89.1 - Notícias",
-    "mensagem": "Últimas notícias na 89.1"
+    "descricao": "DEIRO FM",
+    "mensagem": ""
   },
   {
     "nome": "O POVO",
     "frequencia": "95.500",
-    "pty": "News",
-    "descricao": "O POVO",
+    "pty": "Pop Music",
+    "descricao": "O POVO",
     "mensagem": ""
   },
   {
@@ -32,6 +32,230 @@
     "frequencia": "96.700",
     "pty": "Pop Music",
     "descricao": "O Parlam",
+    "mensagem": ""
+  },
+  {
+    "nome": "ANTENA 1",
+    "frequencia": "97.700",
+    "pty": "Pop Music",
+    "descricao": "ANTENA 1",
+    "mensagem": ""
+  },
+  {
+    "nome": "CEARA FM",
+    "frequencia": "87.100",
+    "pty": "Pop Music",
+    "descricao": "CEARA FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "FORT FM",
+    "frequencia": "90.700",
+    "pty": "Pop Music",
+    "descricao": "FORT FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "SENADO",
+    "frequencia": "103.300",
+    "pty": "Pop Music",
+    "descricao": "SENADO",
+    "mensagem": ""
+  },
+  {
+    "nome": "TEMPO FM",
+    "frequencia": "103.900",
+    "pty": "Pop Music",
+    "descricao": "TEMPO FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "EXPRESSO",
+    "frequencia": "104.300",
+    "pty": "Pop Music",
+    "descricao": "EXPRESSO",
+    "mensagem": ""
+  },
+  {
+    "nome": "JERUSALE",
+    "frequencia": "88.300",
+    "pty": "Religion",
+    "descricao": "RADIO JERUSALEM FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "SHALOM",
+    "frequencia": "91.700",
+    "pty": "Religion",
+    "descricao": "SHALOM",
+    "mensagem": ""
+  },
+  {
+    "nome": "RADIO",
+    "frequencia": "92.100",
+    "pty": "Religion",
+    "descricao": "EFRAIM",
+    "mensagem": ""
+  },
+  {
+    "nome": "VERDINHA",
+    "frequencia": "92.500",
+    "pty": "Pop Music",
+    "descricao": "VERDINHA",
+    "mensagem": ""
+  },
+  {
+    "nome": "JP NEWS",
+    "frequencia": "92.900",
+    "pty": "Pop Music",
+    "descricao": "JP NEWS",
+    "mensagem": ""
+  },
+  {
+    "nome": "CANAA FM",
+    "frequencia": "93.500",
+    "pty": "Religion",
+    "descricao": "CANAA FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "FM 93",
+    "frequencia": "93.900",
+    "pty": "Pop Music",
+    "descricao": "FM 93",
+    "mensagem": ""
+  },
+  {
+    "nome": "SOL FM",
+    "frequencia": "94.300",
+    "pty": "Pop Music",
+    "descricao": "SOL FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "JOVEM",
+    "frequencia": "94.700",
+    "pty": "Pop Music",
+    "descricao": "PAN",
+    "mensagem": ""
+  },
+  {
+    "nome": "DOMBOSCO",
+    "frequencia": "96.100",
+    "pty": "Religion",
+    "descricao": "DOMBOSCO",
+    "mensagem": ""
+  },
+  {
+    "nome": "RADIO",
+    "frequencia": "97.100",
+    "pty": "Religion",
+    "descricao": "MARIA BRASIL",
+    "mensagem": ""
+  },
+  {
+    "nome": "LIDER FM",
+    "frequencia": "98.300",
+    "pty": "Religion",
+    "descricao": "Religion",
+    "mensagem": ""
+  },
+  {
+    "nome": "CIDADE",
+    "frequencia": "99.100",
+    "pty": "Pop Music",
+    "descricao": "CIDADE",
+    "mensagem": ""
+  },
+  {
+    "nome": "REDE",
+    "frequencia": "99.900",
+    "pty": "Religion",
+    "descricao": "ALELUIA 99.9 FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "DEUS E AMOR",
+    "frequencia": "100.900",
+    "pty": "Religion",
+    "descricao": "FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "CRISTA",
+    "frequencia": "101.300",
+    "pty": "Religion",
+    "descricao": "CRISTA",
+    "mensagem": ""
+  },
+  {
+    "nome": "BANDNEWS",
+    "frequencia": "101.700",
+    "pty": "Pop Music",
+    "descricao": "BANDNEWS",
+    "mensagem": ""
+  },
+  {
+    "nome": "TEMPLO",
+    "frequencia": "102.300",
+    "pty": "Religion",
+    "descricao": "CENTRAL FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "105.1MHZ",
+    "frequencia": "105.100",
+    "pty": "Religion",
+    "descricao": "105.1MHZ",
+    "mensagem": ""
+  },
+  {
+    "nome": "NOVABRAS",
+    "frequencia": "106.500",
+    "pty": "Pop Music",
+    "descricao": "NOVABRAS",
+    "mensagem": ""
+  },
+  {
+    "nome": "MIX FM",
+    "frequencia": "107.500",
+    "pty": "Pop Music",
+    "descricao": "MIX FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "107.9MHz",
+    "frequencia": "107.900",
+    "pty": "Pop Music",
+    "descricao": "107.9MHz",
+    "mensagem": ""
+  },
+  {
+    "nome": "LOGOS FM",
+    "frequencia": "95.100",
+    "pty": "Religion",
+    "descricao": "LOGOS FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "SOL FM",
+    "frequencia": "94.300",
+    "pty": "Pop Music",
+    "descricao": "SOL FM",
+    "mensagem": ""
+  },
+  {
+    "nome": "SHALOM",
+    "frequencia": "103.500",
+    "pty": "Religion",
+    "descricao": "SHALOM",
+    "mensagem": ""
+  },
+  {
+    "nome": "RADIO",
+    "frequencia": "79.700",
+    "pty": "Pop Music",
+    "descricao": "RADIO",
     "mensagem": ""
   }
 ]
