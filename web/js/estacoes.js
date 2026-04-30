@@ -230,9 +230,10 @@ if (typeof window !== 'undefined') {
       const pty = ($('.data-pty').first().text() || '').toString().trim();
       const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
       let mensagem = '';
-      const $estacaoMensagem = $('#estacao-rt');
-      if ($estacaoMensagem.length) {
-        mensagem = ($estacaoMensagem.text() || '').toString().trim();
+      // Tenta coletar RT de #data-rt0 ou do fallback dos dados armazenados
+      const $dataRt0 = $('#data-rt0 span');
+      if ($dataRt0.length) {
+        mensagem = ($dataRt0.text() || '').toString().trim();
       } else {
         const psData = $('#data-ps').data('estacao');
         if (psData && psData.rt) mensagem = psData.rt.toString().trim();

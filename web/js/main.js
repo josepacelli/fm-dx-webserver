@@ -891,6 +891,7 @@ const $dataPs = $('#data-ps');
 const $dataSt = $('.data-st');
 const $dataRt0 = $('#data-rt0 span');
 const $dataRt1 = $('#data-rt1 span');
+const $dataRt = $('#data-rt span');
 const $dataAntInput = $('.data-ant input');
 const $dataBwInput = $('.data-bw input');
 const $dataStationContainer = $('#data-station-container');
@@ -941,10 +942,14 @@ function applyEstacaoForFrequency(freqText) {
         try {
             $dataPs.attr('title', matched.descricao || '');
             $dataPs.data('estacao', matched);
-            // Atualiza o elemento #estacao-rt com o valor de rt
             const $rtEl = $('#estacao-rt');
-            if ($rtEl.length) {
-                $rtEl.text(matched.rt || '');
+
+            // Atualiza o RT (RadioText) com o valor de rt
+            if (matched.rt) {
+                if ($rtEl.length) {
+                    $rtEl.text(matched.rt || '');
+                }
+                $dataRt.text(matched.rt || '');
             }
         } catch (e) {
             console.log('applyEstacaoForFrequency error', e);
@@ -952,7 +957,9 @@ function applyEstacaoForFrequency(freqText) {
     } else {
         try {
             $dataPs.removeAttr('title').removeData('estacao');
-            $('#estacao-rt').text('');
+            // Limpa os campos de RT se não encontrar a estação
+            $dataRt0.text('');
+            $dataRt1.text('');
         } catch (e) {
             // ignore
         }
