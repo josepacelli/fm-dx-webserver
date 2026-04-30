@@ -937,14 +937,14 @@ function applyEstacaoForFrequency(freqText) {
 
     const matched = estacoes.find(e => Number(e.frequencia) === Number(parsed));
     if (matched) {
-        // Atualiza tooltip/descrição no campo PS (ou em outro elemento se desejar)
+        // Atualiza tooltip/descrição no campo PS
         try {
             $dataPs.attr('title', matched.descricao || '');
             $dataPs.data('estacao', matched);
-            // Se existir elemento #estacao-mensagem, atualiza-o
-            const $msg = $('#estacao-mensagem');
-            if ($msg.length) {
-                $msg.text(matched.mensagem || '');
+            // Atualiza o elemento #estacao-rt com o valor de rt
+            const $rtEl = $('#estacao-rt');
+            if ($rtEl.length) {
+                $rtEl.text(matched.rt || '');
             }
         } catch (e) {
             console.log('applyEstacaoForFrequency error', e);
@@ -952,7 +952,7 @@ function applyEstacaoForFrequency(freqText) {
     } else {
         try {
             $dataPs.removeAttr('title').removeData('estacao');
-            $('#estacao-mensagem').text('');
+            $('#estacao-rt').text('');
         } catch (e) {
             // ignore
         }

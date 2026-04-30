@@ -36,14 +36,14 @@ $(document).ready(function() {
       // If station name is empty, fallback to PS text
       if (!nome) nome = ($('#data-ps').text() || '').toString().trim();
 
-      const defaults = { nome: nome || '', frequencia: freq || '', pty: pty || '', descricao: descricao || '', mensagem: mensagem || '' };
+      const defaults = { nome: nome || '', frequencia: freq || '', pty: pty || '', descricao: descricao || '', rt: mensagem || '' };
       console.log('[estacoes] add-row defaults ->', defaults);
 
       addEstacaoRow(defaults, undefined, true);
     } catch (e) {
       // Fallback to empty row if any error occurs
       console.error('[estacoes] error gathering RDS defaults for new row', e);
-      addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', mensagem: '' });
+      addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', rt: '' });
     }
   });
 
@@ -67,7 +67,7 @@ function openEstacoes() {
         frequencia: (e.frequencia === undefined || e.frequencia === null) ? '' : String(e.frequencia),
         pty: e.pty || '',
         descricao: e.descricao || '',
-        mensagem: e.mensagem || ''
+        rt: e.rt || ''
       })) : [];
 
       populateEstacaoTable();
@@ -110,7 +110,7 @@ function addEstacaoRow(estacao, index, showToast = false) {
         <input type="text" class="estacao-descricao" value="${escapeHtml(estacao.descricao || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Descrição">
       </td>
       <td style="padding: 12px; border-right: 1px solid var(--color-2);">
-        <input type="text" class="estacao-mensagem" value="${escapeHtml(estacao.mensagem || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Mensagem de boas-vindas">
+        <input type="text" class="estacao-rt" value="${escapeHtml(estacao.rt || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Ligação de rádio">
       </td>
       <td style="padding: 12px; text-align: center;">
         <button class="estacoes-delete-btn" style="padding: 6px 12px; border-radius: 5px; cursor: pointer; background-color: var(--color-3); color: var(--color-text);">
@@ -146,7 +146,7 @@ if (typeof window !== 'undefined') {
         return {defaults, rowId};
       } else {
         console.warn('[estacoes] addEstacaoFromRds: no defaults available, adding empty row');
-        const rowId = addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', mensagem: '' });
+        const rowId = addEstacaoRow({ nome: '', frequencia: '', pty: '', descricao: '', rt: '' });
         return {defaults: null, rowId};
       }
     } catch (e) {
@@ -168,11 +168,11 @@ function saveEstacoes() {
       frequencia: row.find('.estacao-frequencia').val().trim(),
       pty: row.find('.estacao-pty').val().trim(),
       descricao: row.find('.estacao-descricao').val().trim(),
-      mensagem: row.find('.estacao-mensagem').val().trim()
+      rt: row.find('.estacao-rt').val().trim()
     };
 
     // Only add if at least one field is filled
-    if (estacao.nome || estacao.frequencia || estacao.pty || estacao.descricao || estacao.mensagem) {
+    if (estacao.nome || estacao.frequencia || estacao.pty || estacao.descricao || estacao.rt) {
       estacoes.push(estacao);
     }
   });
@@ -230,15 +230,15 @@ if (typeof window !== 'undefined') {
       const pty = ($('.data-pty').first().text() || '').toString().trim();
       const descricao = ($('#data-ps').attr('title') || $('#data-ps').text() || '').toString().trim();
       let mensagem = '';
-      const $estacaoMensagem = $('#estacao-mensagem');
+      const $estacaoMensagem = $('#estacao-rt');
       if ($estacaoMensagem.length) {
         mensagem = ($estacaoMensagem.text() || '').toString().trim();
       } else {
         const psData = $('#data-ps').data('estacao');
-        if (psData && psData.mensagem) mensagem = psData.mensagem.toString().trim();
+        if (psData && psData.rt) mensagem = psData.rt.toString().trim();
       }
       if (!nome) nome = ($('#data-ps').text() || '').toString().trim();
-      return { nome, frequencia: freq, cidade, pty, descricao, mensagem };
+      return { nome, frequencia: freq, cidade, pty, descricao, rt: mensagem };
     } catch (e) {
       console.error('[estacoes] _getRdsDefaults error', e);
       return null;
