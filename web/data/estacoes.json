@@ -4,7 +4,7 @@
     "frequencia": "102.700",
     "pty": "Pop Music",
     "descricao": "BEACH PARK",
-    "mensagem": ""
+    "rt": ""
   },
   {
     "nome": "JANGA",
@@ -254,8 +254,22 @@
   {
     "nome": "RADIO",
     "frequencia": "79.700",
-    "pty": "Pop Music",
+    "pty": "Religion",
     "descricao": "RADIO",
+    "mensagem": ""
+  },
+  {
+    "nome": "RADIO UIRAPURU - REDE ALELUIA",
+    "frequencia": "90.300",
+    "pty": "Religion",
+    "descricao": "RADIO UIRAPURU - REDE ALELUIA",
+    "mensagem": ""
+  },
+  {
+    "nome": "RADIO EDUCATIVA - IFCE FM",
+    "frequencia": "86.700",
+    "pty": "Pop Music",
+    "descricao": "RADIO EDUCATIVA - IFCE FM",
     "mensagem": ""
   }
 ]
