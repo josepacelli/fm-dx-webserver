@@ -107,9 +107,6 @@ function addEstacaoRow(estacao, index, showToast = false) {
         <input type="text" class="estacao-pty" value="${escapeHtml(estacao.pty || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Pop Music">
       </td>
       <td style="padding: 12px; border-right: 1px solid var(--color-2);">
-        <input type="text" class="estacao-descricao" value="${escapeHtml(estacao.descricao || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Descrição">
-      </td>
-      <td style="padding: 12px; border-right: 1px solid var(--color-2);">
         <input type="text" class="estacao-rt" value="${escapeHtml(estacao.rt || '')}" style="width: 100%; padding: 8px; border: 1px solid var(--color-3); border-radius: 5px; background-color: var(--color-1);" placeholder="Ligação de rádio">
       </td>
       <td style="padding: 12px; text-align: center;">
@@ -167,7 +164,7 @@ function saveEstacoes() {
       nome: row.find('.estacao-nome').val().trim(),
       frequencia: row.find('.estacao-frequencia').val().trim(),
       pty: row.find('.estacao-pty').val().trim(),
-      descricao: row.find('.estacao-descricao').val().trim(),
+      descricao: row.find('.estacao-descricao').val() || '',
       rt: row.find('.estacao-rt').val().trim()
     };
 
