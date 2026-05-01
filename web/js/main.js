@@ -954,7 +954,8 @@ function applyEstacaoForFrequency(freqText) {
     if (matched) {
         // Atualiza tooltip/descrição no campo PS
         try {
-            $dataPs.attr('title', matched.descricao || '');
+            $dataPs.attr('title', matched.nome || '');
+            $dataPs.data('estacao', matched);
             $dataPsi.text(matched.nome || '');
 
             const $rtEl = $('#estacao-rt');
