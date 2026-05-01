@@ -11,7 +11,8 @@ $(document).ready(function() {
   });
 
   // Add new row button
-  $(document).on('click', '#estacoes-add-row', function() {
+  $('#estacoes-add-row').on('click', function(e) {
+    e.preventDefault();
     // Gather RDS/local UI values as defaults
     try {
       const freqRaw = ($('#data-frequency').text() || '').toString().trim();
@@ -48,7 +49,9 @@ $(document).ready(function() {
   });
 
   // Delete row button
-  $(document).on('click', '.estacoes-delete-btn', function() {
+  $('#estacoes-tbody').on('click', '.estacoes-delete-btn', function(e) {
+    e.preventDefault();
+    console.log('Remover clicado');
     $(this).closest('tr').remove();
   });
 });
