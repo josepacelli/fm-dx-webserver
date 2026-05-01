@@ -901,6 +901,7 @@ const $dataFrequency = $('#data-frequency');
 const $commandInput = $("#commandinput");
 const $dataPi = $('#data-pi');
 const $dataPs = $('#data-ps');
+const $dataPsi = $('#data-psi');
 const $dataSt = $('.data-st');
 const $dataRt0 = $('#data-rt0 span');
 const $dataRt1 = $('#data-rt1 span');
@@ -954,7 +955,8 @@ function applyEstacaoForFrequency(freqText) {
         // Atualiza tooltip/descrição no campo PS
         try {
             $dataPs.attr('title', matched.descricao || '');
-            $dataPs.data('estacao', matched);
+            $dataPsi.text(matched.nome || '');
+
             const $rtEl = $('#estacao-rt');
 
             // Atualiza o RT (RadioText) com o valor de rt
