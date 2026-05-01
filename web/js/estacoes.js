@@ -176,7 +176,8 @@ function saveEstacoes() {
 
   // Validate data
   if (estacoes.length === 0) {
-    sendToast('warning', 'Atenção', 'Adicione pelo menos uma estação antes de salvar', true, true);
+    sendToast('warning',
+        'Atenção', 'Adicione pelo menos uma estação antes de salvar', true, true);
     return;
   }
 

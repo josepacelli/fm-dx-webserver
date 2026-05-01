@@ -1,6 +1,6 @@
 [
   {
-    "nome": "RADIO",
+    "nome": "RADIO BEACHPARK",
     "frequencia": "102.700",
     "pty": "Pop Music",
     "descricao": "",
@@ -271,5 +271,12 @@
     "pty": "Pop Music",
     "descricao": "",
     "rt": "UMA EMISSORA DO INSITUTO FEDERAL DO CEARA"
+  },
+  {
+    "nome": "PARK",
+    "frequencia": "102.700",
+    "pty": "Pop Music",
+    "descricao": "",
+    "rt": ""
   }
 ]
