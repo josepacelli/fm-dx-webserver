@@ -3,28 +3,28 @@
     "nome": "RADIO",
     "frequencia": "102.700",
     "pty": "Pop Music",
-    "descricao": "BEACH PARK",
+    "descricao": "BEACH PARK 102.7",
     "rt": "A NOVA ONDA DO RADIO"
   },
   {
     "nome": "JANGA",
     "frequencia": "88.900",
     "pty": "Pop Music",
-    "descricao": "DEIRO FM",
+    "descricao": "DEIRO FM 88.9",
     "rt": "TODO MUNDO AMA"
   },
   {
     "nome": "O POVO",
     "frequencia": "95.500",
     "pty": "Pop Music",
-    "descricao": "O POVO",
+    "descricao": "O POVO 95.5",
     "rt": "A RADIO QUE TOCA NOTICIAS"
   },
   {
-    "nome": "ATLANTIC",
+    "nome": "ATLANTICO",
     "frequencia": "105.700",
     "pty": "Pop Music",
-    "descricao": "ATLANTIC",
+    "descricao": "ATLANTICO",
     "rt": "SUA VIDA NA MELHOR TRILHA"
   },
   {
@@ -38,7 +38,7 @@
     "nome": "ANTENA 1",
     "frequencia": "97.700",
     "pty": "Pop Music",
-    "descricao": "ANTENA 1",
+    "descricao": "97.7 FM",
     "rt": "A RADIO MAIS OUVIDA NO BRASIL"
   },
   {
@@ -101,35 +101,35 @@
     "nome": "VERDINHA",
     "frequencia": "92.500",
     "pty": "Pop Music",
-    "descricao": "VERDINHA",
+    "descricao": "FM 92.5",
     "rt": "JORNALISMO QUE FAZ A NOSSA LINGUA"
   },
   {
-    "nome": "JP NEWS",
+    "nome": "JOVEM PAN",
     "frequencia": "92.900",
     "pty": "Pop Music",
-    "descricao": "JP NEWS",
+    "descricao": "NEWS FORTALEZA",
     "rt": "A REDE DA INFORMACA0"
   },
   {
     "nome": "CANAA FM",
     "frequencia": "93.500",
     "pty": "Religion",
-    "descricao": "CANAA FM",
+    "descricao": "93.5",
     "rt": "A RADIO DA FAMILIA CRISTA"
   },
   {
     "nome": "FM 93",
     "frequencia": "93.900",
     "pty": "Pop Music",
-    "descricao": "FM 93",
+    "descricao": "SEMPRE AO SEU LADO",
     "rt": "FM 93 SEMPRE AO SEU LADO"
   },
   {
     "nome": "SOL FM",
     "frequencia": "94.300",
     "pty": "Pop Music",
-    "descricao": "SOL FM",
+    "descricao": "94.3 OFICIAL",
     "rt": "NOSSO BRILHO E VOCE"
   },
   {
@@ -157,14 +157,14 @@
     "nome": "LIDER FM",
     "frequencia": "98.300",
     "pty": "Religion",
-    "descricao": "Religion",
+    "descricao": "98.3",
     "rt": "TA NA LIDER,TA LIGADO EM JESUS."
   },
   {
     "nome": "CIDADE",
     "frequencia": "99.100",
     "pty": "Pop Music",
-    "descricao": "CIDADE",
+    "descricao": "FM 99.1",
     "rt": "CIDADE FM 99.1"
   },
   {
@@ -182,10 +182,10 @@
     "rt": "DEUS E AMOR FM 100.9"
   },
   {
-    "nome": "CRISTA",
+    "nome": "NOVA RADIO CRISTA",
     "frequencia": "101.300",
     "pty": "Religion",
-    "descricao": "CRISTA",
+    "descricao": "NOVA RADIO CRISTA",
     "rt": "TRANSMITINDO BOAS NOVAS"
   },
   {
@@ -193,7 +193,7 @@
     "frequencia": "101.700",
     "pty": "Pop Music",
     "descricao": "BANDNEWS",
-    "rt": "EM 01 SEGUNDO TUDO PODE MUDAR"
+    "rt": "EM 1 SEGUNDO TUDO PODE MUDAR"
   },
   {
     "nome": "TEMPLO",
@@ -214,7 +214,7 @@
     "frequencia": "106.500",
     "pty": "Pop Music",
     "descricao": "NOVABRAS",
-    "rt": "A MAIOR AUDIENCIA, NO PUBLICO ADULTO"
+    "rt": "A MAIOR AUDIENCIA NO PUBLICO ADULTO"
   },
   {
     "nome": "MIX FM",
@@ -227,7 +227,7 @@
     "nome": "RADIO",
     "frequencia": "107.900",
     "pty": "Pop Music",
-    "descricao": "UNIVERSITARIA FM 107.9MHZ",
+    "descricao": "RADIO UNIVERSITARIA FM 107.9MHZ",
     "rt": "RADIO UNIVERSITARIA FM 107.9MHZ"
   },
   {
