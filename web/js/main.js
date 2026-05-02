@@ -284,9 +284,12 @@ $(document).ready(function () {
     // Carrega as estações do arquivo JSON (se existir)
     try {
         loadEstacoes();
+        updatePsiMarqueeState();
     } catch (e) {
         console.warn('loadEstacoes failed', e);
     }
+
+    $(window).on('resize', updatePsiMarqueeState);
 });
 
 function getServerTime() {
@@ -957,6 +960,7 @@ function applyEstacaoForFrequency(freqText) {
             $dataPs.attr('title', matched.nome || '');
             $dataPs.data('estacao', matched);
             $dataPsi.text(matched.nome || '');
+            updatePsiMarqueeState();
 
             const $rtEl = $('#estacao-rt');
 
@@ -973,12 +977,44 @@ function applyEstacaoForFrequency(freqText) {
     } else {
         try {
             $dataPs.removeAttr('title').removeData('estacao');
+            $dataPsi.text('');
+            updatePsiMarqueeState();
             // Limpa os campos de RT se não encontrar a estação
             $dataRt0.text('');
             $dataRt1.text('');
         } catch (e) {
             // ignore
         }
+    }
+}
+
+function updatePsiMarqueeState() {
+    const el = $dataPsi[0];
+    if (!el) return;
+
+    const text = ($dataPsi.text() || '').trim();
+    if (!text) {
+        $dataPsi.removeClass('psi-marquee');
+        $dataPsi.css('--psi-scroll-offset', '0px');
+        $dataPsi.css('--psi-scroll-duration', '0s');
+        return;
+    }
+
+    $dataPsi.removeClass('psi-marquee');
+
+    const containerWidth = el.parentElement ? el.parentElement.clientWidth : 0;
+    if (!containerWidth) return;
+
+    const overflow = el.scrollWidth - containerWidth;
+    if (overflow > 0) {
+        const speedPxPerSec = 30;
+        const duration = Math.max(8, Math.min(22, (overflow + 24) / speedPxPerSec));
+        $dataPsi.addClass('psi-marquee');
+        $dataPsi.css('--psi-scroll-offset', '-' + (overflow + 24) + 'px');
+        $dataPsi.css('--psi-scroll-duration', duration + 's');
+    } else {
+        $dataPsi.css('--psi-scroll-offset', '0px');
+        $dataPsi.css('--psi-scroll-duration', '0s');
     }
 }
 
