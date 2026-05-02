@@ -8,3 +8,4 @@ node_modules/
 !/plugins/example.js
 /plugins_configs
 /.idea/
+/.playwright-mcp/
