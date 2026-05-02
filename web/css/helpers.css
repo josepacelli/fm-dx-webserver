@@ -169,15 +169,6 @@
     text-overflow: ellipsis;
 }
 
-#data-psi.psi-marquee {
-    display: inline-block;
-    overflow: visible;
-    text-overflow: clip;
-    padding-right: 24px;
-    will-change: transform;
-    animation: psi-marquee var(--psi-scroll-duration, 10s) linear infinite;
-}
-
 .text-color-default {
     color: var(--color-text);
 }
@@ -323,20 +314,9 @@ table .input-text {
     }
 }
 
-@keyframes psi-marquee {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(var(--psi-scroll-offset, -120px));
-    }
-}
 
-@media (prefers-reduced-motion: reduce) {
-    #data-psi.psi-marquee {
-        animation: none;
-    }
-}
+
+
 
 @media only screen and (max-width: 960px) {
     .text-medium-big {

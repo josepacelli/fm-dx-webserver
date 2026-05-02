@@ -4,6 +4,9 @@
   "description": "FM DX Webserver",
   "main": "index.js",
   "scripts": {
+    "dev": "supervisor -q -e \"js|ejs|html\" -i \"web/data/estacoes.json,web/data/presets.json,config.json,serverlog.txt\" index.js",
+    "dev:debug": "supervisor -q -e \"js|ejs|html\" -i \"web/data/estacoes.json,web/data/presets.json,config.json,serverlog.txt\" -- index.js --debug",
+    "dev:full": "supervisor -q -e \"js|ejs|html\" -i \"web/data/estacoes.json,web/data/presets.json,config.json,serverlog.txt\" -- index.js --debug --ffmpegdebug",
     "debug": "node index.js --debug",
     "debug_ffmpeg": "node index.js --ffmpegdebug",
     "debug_full": "node index.js --debug --ffmpegdebug",
@@ -23,5 +26,8 @@
     "net": "1.0.2",
     "serialport": "12.0.0",
     "ws": "8.18.1"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
   }
 }
