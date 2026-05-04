@@ -169,6 +169,20 @@
     text-overflow: ellipsis;
 }
 
+.psi-marquee {
+    animation: psi-scroll var(--psi-scroll-duration, 0s) linear infinite;
+    will-change: transform;
+}
+
+@keyframes psi-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(var(--psi-scroll-offset, 0));
+    }
+}
+
 .text-color-default {
     color: var(--color-text);
 }

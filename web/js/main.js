@@ -1010,7 +1010,7 @@ function updatePsiMarqueeState() {
         const speedPxPerSec = 30;
         const duration = Math.max(8, Math.min(22, (overflow + 24) / speedPxPerSec));
         $dataPsi.addClass('psi-marquee');
-        $dataPsi.css('--psi-scroll-offset', '-' + (overflow + 24) + 'px');
+        $dataPsi.css('--psi-scroll-offset', (overflow + 24) + 'px');
         $dataPsi.css('--psi-scroll-duration', duration + 's');
     } else {
         $dataPsi.css('--psi-scroll-offset', '0px');
