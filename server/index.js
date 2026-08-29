@@ -781,6 +781,14 @@ httpServer.on('upgrade', (request, socket, head) => {
 
 app.use(express.static(path.join(__dirname, '../web'))); // Serve the entire web folder to the user
 fmdxList.update();
+dataHandler.startClimateUpdate(); // Start climate data updates when WiFi is active
+
+// Initial climate fetch if WiFi is active
+if (serverConfig.xdrd.wirelessConnection === true) {
+  dataHandler.fetchClimateData((climaStr) => {
+    dataHandler.dataToSend.clima = climaStr;
+  });
+}
 
 helpers.checkIPv6Support((isIPv6Supported) => {
   const ipv4Address = serverConfig.webserver.webserverIp === '0.0.0.0' ? 'localhost' : serverConfig.webserver.webserverIp;

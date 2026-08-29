@@ -1,6 +1,7 @@
 /* Libraries / Imports */
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
 const koffi = require('koffi');
 const path = require('path');
 const os = require('os');
@@ -128,22 +129,35 @@ const callbacks = {
     dataToSend.country_iso = iso
   ), 'callback_country*'),
 
-  ps: koffi.register(rds => (
-    ps = rdsparser.get_ps(rds),
-    dataToSend.ps = decode_unicode(ps),
-    dataToSend.ps_errors = decode_errors(ps)
-  ), 'callback_ps*'),
+  ps: koffi.register(rds => {
+    ps = rdsparser.get_ps(rds);
+    let psText = decode_unicode(ps);
+
+    // Adiciona clima ao PS se WiFi estiver ativo
+    if (serverConfig.xdrd.wirelessConnection === true && dataToSend.clima) {
+      psText = (psText + ' | ' + dataToSend.clima).substring(0, 64);
+    }
+
+    dataToSend.ps = psText;
+    dataToSend.ps_errors = decode_errors(ps);
+  }, 'callback_ps*'),
 
   rt: koffi.register((rds, flag) => {
     const rt = rdsparser.get_rt(rds, flag);
+    let rtText = decode_unicode(rt);
+
+    // Adiciona clima ao RT se WiFi estiver ativo
+    if (serverConfig.xdrd.wirelessConnection === true && dataToSend.clima) {
+      rtText = (rtText + ' [' + dataToSend.clima + ']').substring(0, 64);
+    }
 
     if (flag === 0) {
-      dataToSend.rt0 = decode_unicode(rt);
+      dataToSend.rt0 = rtText;
       dataToSend.rt0_errors = decode_errors(rt);
     }
 
     if (flag === 1) {
-      dataToSend.rt1 = decode_unicode(rt);
+      dataToSend.rt1 = rtText;
       dataToSend.rt1_errors = decode_errors(rt);
     }
     dataToSend.rt_flag = flag;
@@ -154,7 +168,7 @@ const callbacks = {
     /*console.log('PTYN: ' + value)*/
   ), 'callback_ptyn*'),
 
-  ct: koffi.register((rds, ct) => (
+  ct: koffi.register((rds, ct) => {
     year = rdsparser.ct_get_year(ct),
     month = String(rdsparser.ct_get_month(ct)).padStart(2, '0'),
     day = String(rdsparser.ct_get_day(ct)).padStart(2, '0'),
@@ -163,9 +177,11 @@ const callbacks = {
     offset = rdsparser.ct_get_offset(ct),
     tz_sign = (offset >= 0 ? '+' : '-'),
     tz_hour = String(Math.abs(Math.floor(offset / 60))).padStart(2, '0'),
-    tz_minute = String(Math.abs(offset % 60)).padStart(2, '0')
+    tz_minute = String(Math.abs(offset % 60)).padStart(2, '0'),
+    dataToSend.rds_date = `${day}/${month}/${year}`,
+    dataToSend.rds_time = `${hour}:${minute} ${tz_sign}${tz_hour}:${tz_minute}`
     //console.log('CT: ' + year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ' (' + tz_sign + tz_hour + ':' + tz_minute + ')')
-  ), 'callback_ct*')
+  }, 'callback_ct*')
 };
 
 let rds = rdsparser.new()
@@ -208,6 +224,29 @@ const decode_errors = function(string) {
     return '';
 };
 
+const getDateTimeString = function() {
+    if (dataToSend.rds_time) {
+      return dataToSend.rds_date && dataToSend.rds_time ? `${dataToSend.rds_date} ${dataToSend.rds_time}` : dataToSend.rds_time;
+    }
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    return `${hour}:${minute}`;
+};
+
+const getTimeString = function() {
+    if (dataToSend.rds_time) {
+      return dataToSend.rds_time;
+    }
+    const now = new Date();
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    return `${hour}:${minute}`;
+};
+
 const updateInterval = 75;
 
 // Initialize the data object
@@ -234,6 +273,8 @@ var dataToSend = {
   ims: 0,
   eq: 0,
   ant: 0,
+  rds_date: '',
+  rds_time: '',
   txInfo: {
     tx: '',
     pol: '',
@@ -249,7 +290,93 @@ var dataToSend = {
   country_name: '',
   country_iso: 'UN',
   users: 0,
+  clima: '',
 };
+
+// Climate data cache
+let climaCache = {
+  data: '',
+  timestamp: 0,
+  updateInterval: 60 * 60 * 1000 // 1 hour
+};
+
+// Fetch climate data from Fortaleza using fixed IP
+function fetchClimateData(callback) {
+  const now = Date.now();
+
+  // Return cached data if still valid
+  if (climaCache.data && (now - climaCache.timestamp) < climaCache.updateInterval) {
+    callback(climaCache.data);
+    return;
+  }
+
+  // IP fixo para wttr.in (pode ser alterado)
+  const climaServerIp = '93.88.174.13'; // wttr.in IP fixo
+  const climaPath = '/Fortaleza?format=%j';
+
+  const options = {
+    hostname: climaServerIp,
+    port: 80,
+    path: climaPath,
+    method: 'GET',
+    headers: {
+      'Host': 'wttr.in',
+      'User-Agent': 'Node.js'
+    },
+    timeout: 5000
+  };
+
+  const req = http.request(options, (res) => {
+    let data = '';
+
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    res.on('end', () => {
+      try {
+        const weatherData = JSON.parse(data);
+        const current = weatherData.current_condition[0];
+        const temp = current.temp_C;
+        const desc = current.weatherDesc[0].value;
+        const climaStr = `${temp}°C ${desc}`.substring(0, 32); // Limita a 32 caracteres
+
+        climaCache.data = climaStr;
+        climaCache.timestamp = now;
+        callback(climaStr);
+      } catch (error) {
+        console.error('Erro ao parsear dados climáticos:', error);
+        callback('');
+      }
+    });
+  });
+
+  req.on('error', (error) => {
+    console.error('Erro ao buscar dados climáticos:', error.message);
+    callback('');
+  });
+
+  req.on('timeout', () => {
+    req.abort();
+  });
+
+  req.end();
+}
+
+// Update climate data periodically when WiFi is active
+let climaUpdateInterval = null;
+
+function startClimateUpdate() {
+  if (climaUpdateInterval) return;
+
+  climaUpdateInterval = setInterval(() => {
+    if (serverConfig.xdrd.wirelessConnection === true) {
+      fetchClimateData((climaStr) => {
+        dataToSend.clima = climaStr;
+      });
+    }
+  }, 5 * 60 * 1000); // Atualiza a cada 5 minutos
+}
 
 const filterMappings = {
   'G11': { eq: 1, ims: 1 },
@@ -434,6 +561,14 @@ function handleData(wss, receivedData, rdsWss) {
       console.log("Error fetching Tx info:", error);
   });
 
+    // Ensure rds_time is always populated (use server time if CT not available)
+    if (!dataToSend.rds_time) {
+      const now = new Date();
+      const hour = String(now.getHours()).padStart(2, '0');
+      const minute = String(now.getMinutes()).padStart(2, '0');
+      dataToSend.rds_time = `${hour}:${minute}`;
+    }
+
     // Send the updated data to the client
     const dataToSendJSON = JSON.stringify(dataToSend);
     if (currentTime - lastUpdateTime >= updateInterval) {
@@ -515,5 +650,5 @@ function processSignal(receivedData, st, stForced) {
 }
 
 module.exports = {
-  handleData, showOnlineUsers, dataToSend, initialData, resetToDefault, state
+  handleData, showOnlineUsers, dataToSend, initialData, resetToDefault, state, startClimateUpdate, fetchClimateData
 };

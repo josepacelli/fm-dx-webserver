@@ -904,6 +904,7 @@ const $dataFrequency = $('#data-frequency');
 const $commandInput = $("#commandinput");
 const $dataPi = $('#data-pi');
 const $dataPs = $('#data-ps');
+const $dataPsDatetime = $('#data-ps-datetime');
 const $dataPsi = $('#data-psi');
 const $dataSt = $('.data-st');
 const $dataRt0 = $('#data-rt0 span');
@@ -1101,6 +1102,18 @@ const updateDataElements = throttle(function (parsedData) {
         parsedData.ps = parsedData.ps.replace(/\s/g, '_');
     }
     updateHtmlIfChanged($dataPs, parsedData.ps === '?' ? "<span class='opacity-half'>?</span>" : processString(parsedData.ps, parsedData.ps_errors));
+
+    let psDateTime = '';
+    if (parsedData.rds_date && parsedData.rds_time) {
+        const timeParts = parsedData.rds_time.split(':');
+        const hm = timeParts[0] + ':' + timeParts[1];
+        psDateTime = parsedData.rds_date + ' ' + hm + ':00';
+    } else if (parsedData.rds_time) {
+        const timeParts = parsedData.rds_time.split(':');
+        const hm = timeParts[0] + ':' + timeParts[1];
+        psDateTime = hm + ':00';
+    }
+    updateTextIfChanged($dataPsDatetime, psDateTime);
 
     if (parsedData.st) {
         $dataSt.parent().removeClass('opacity-half');

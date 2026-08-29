@@ -4,7 +4,7 @@
     "frequencia": "102.700",
     "pty": "Pop Music",
     "descricao": "",
-    "rt": "A NOVA ONDA DO RADIO"
+    "rt": "A CADA MUSICA TEM UMA NOVA DESCOBERTA"
   },
   {
     "nome": "JANGADEIRO",
@@ -46,7 +46,7 @@
     "frequencia": "87.100",
     "pty": "Pop Music",
     "descricao": "",
-    "rt": "CEARA FM 87.1MHZ"
+    "rt": "CEARA FM 87.1"
   },
   {
     "nome": "RADIO FORTALEZA",
@@ -60,7 +60,7 @@
     "frequencia": "103.300",
     "pty": "Pop Music",
     "descricao": "",
-    "rt": "RADIO SENADO MUSICA E INFORMACAO"
+    "rt": "RADIO SENADO FM 103.3"
   },
   {
     "nome": "TEMPO FM",
@@ -144,7 +144,7 @@
     "frequencia": "96.100",
     "pty": "Religion",
     "descricao": "",
-    "rt": "FM DOM BOSCO 96,1"
+    "rt": "FM DOM BOSCO 96.1"
   },
   {
     "nome": "RADIO",
@@ -158,7 +158,7 @@
     "frequencia": "98.300",
     "pty": "Religion",
     "descricao": "",
-    "rt": "TA NA LIDER,TA LIGADO EM JESUS."
+    "rt": "TA NA LIDER, TA LIGADO EM JESUS"
   },
   {
     "nome": "CIDADE",
@@ -203,11 +203,11 @@
     "rt": "A VOZ DA ASSEMBLEIA DE DEUS"
   },
   {
-    "nome": "AD CIDADE",
+    "nome": "LOGOS FM",
     "frequencia": "105.100",
     "pty": "Religion",
     "descricao": "",
-    "rt": "AD CIDADE FM 105.1"
+    "rt": "TA NA LOGOS TA NA BENCAO"
   },
   {
     "nome": "NOVABRAS",
@@ -228,14 +228,14 @@
     "frequencia": "107.900",
     "pty": "Pop Music",
     "descricao": "",
-    "rt": "RADIO UNIVERSITARIA FM 107.9MHZ"
+    "rt": "RADIO UNIVERSITARIA FM 107.9"
   },
   {
-    "nome": "LOGOS FM",
+    "nome": "MONTE MOR FM",
     "frequencia": "95.100",
-    "pty": "Religion",
+    "pty": "Pop Music",
     "descricao": "",
-    "rt": "TA NA LOGOS TA NA BENCAO"
+    "rt": "MUSICA POP PARA TODA PACAJUS"
   },
   {
     "nome": "SOL FM",
@@ -254,9 +254,9 @@
   {
     "nome": "RADIO METROPOLITANA",
     "frequencia": "79.700",
-    "pty": "Religion",
+    "pty": "Pop Music",
     "descricao": "",
-    "rt": "RADIO METROPOLITANA AM 93.0"
+    "rt": "RADIO METROPOLITANA FM 79.7"
   },
   {
     "nome": "RADIO UIRAPURU",
@@ -271,5 +271,19 @@
     "pty": "Pop Music",
     "descricao": "",
     "rt": "UMA EMISSORA DO INSITUTO FEDERAL DO CEARA"
+  },
+  {
+    "nome": "RADIO METROPOLITANA",
+    "frequencia": "91.300",
+    "pty": "Pop Music",
+    "descricao": "",
+    "rt": "RADIO METROPOLITANA FM 91.3"
+  },
+  {
+    "nome": "89 FM",
+    "frequencia": "89.900",
+    "pty": "Pop Music",
+    "descricao": "",
+    "rt": "89 FM - 89.9 FM"
   }
 ]

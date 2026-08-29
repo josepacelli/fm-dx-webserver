@@ -4,7 +4,8 @@
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_take_screenshot",
-      "Bash(grep -rn 'data-ps\\\\|#data-ps\\\\|$dataPs' C:/Users/josep/git/fm-dx-webserver/web/js/ '--include=*.js')"
+      "Bash(grep -rn 'data-ps\\\\|#data-ps\\\\|$dataPs' C:/Users/josep/git/fm-dx-webserver/web/js/ '--include=*.js')",
+      "Bash(node -c server/datahandler.js)"
     ]
   }
 }
