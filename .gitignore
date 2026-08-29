@@ -1,5 +1,6 @@
 node_modules/
 /*.json
+/web/data/estacoes.json
 /serverlog.txt
 /web/js/plugins/
 /libraries/**

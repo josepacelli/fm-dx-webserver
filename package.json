@@ -29,5 +29,10 @@
   },
   "devDependencies": {
     "supervisor": "^0.12.0"
+  },
+  "allowScripts": {
+    "@serialport/bindings-cpp@12.0.1": true,
+    "ffmpeg-static@5.2.0": true,
+    "koffi@2.7.2": true
   }
 }
